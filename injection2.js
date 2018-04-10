@@ -21,7 +21,7 @@ function calc(ip, maska){
 
   var output = [
      {vrednost: "IP naslov:", decimalna: ip, binarna: ipToBinary(ip)},
-     {vrednost: "Maska:", decimalna: ip, binarna: ipToBinary(ip)},
+     {vrednost: "Maska:", decimalna: ip, binarna: ipToBinary(ip) + "(/"+countOnes(ipToBinary(maska))+")"},
      {vrednost: "Maska razreda:", decimalna: ip, binarna: ipToBinary(ip)},
      {vrednost: "---", decimalna: "---", binarna: "---"},
      {vrednost: "Omrežje:", decimalna: intToIp(omrezjeInt), binarna: ipToBinary(intToIp(omrezjeInt))},
