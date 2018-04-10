@@ -25,19 +25,31 @@
       //izracunaj brodcast = ip OR NEG maska
       let brodcastInt = ipInt | ~maskaInt;
 
+      let razred = "";
+      let maskaRazreda = "0.0.0.0";
+      if(ipToBinary(ip).slice(0,1) == "0"){razred = "A"; maskaRazreda = "255.0.0.0"}
+      if(ipToBinary(ip).slice(0,2) == "10"){razred = "B"; maskaRazreda = "255.255.0.0"}
+      if(ipToBinary(ip).slice(0,3) == "110"){razred = "C"; maskaRazreda = "255.255.255.0"}
+      if(ipToBinary(ip).slice(0,4) == "1110")razred = "D";
+      if(ipToBinary(ip).slice(0,5) == "11110")razred = "E";
+
+      let stOmrezij = 2**countOnes(ipToBinary(intToIp(ipToInt(maskaRazreda) ^ ipToInt(maska))));
+
       let output = "";
       output += "<table>";
       output += "<tr><th></th><th>desetiški zapis</th><th>binarni zapis</th></tr>";
 
       output += "<tr><td>IP naslov:</td><td>"+ip+"</td><td>"+ipToBinary(ip)+"</td><tr>";
       output += "<tr><td>Maska:</td><td>"+maska+"</td><td>"+ipToBinary(maska)+" (/"+countOnes(ipToBinary(maska))+")</td><tr>";
+      output += "<tr><td>Maska razreda "+razred+":</td><td>"+maskaRazreda+"</td><td>"+ipToBinary(maskaRazreda)+"</td><tr>";
       output += "<tr><td>---</td></tr>";
       output += "<tr><td>Omrežje:</td><td>"+intToIp(omrezjeInt)+"</td><td>"+ipToBinary(intToIp(omrezjeInt))+"</td><tr>";
       output += "<tr><td>Prvi gostitelj:</td><td>"+intToIp(omrezjeInt+1)+"</td><td>"+ipToBinary(intToIp(omrezjeInt+1))+"</td><tr>";
       output += "<tr><td>Zadnji gostitelj:</td><td>"+intToIp(brodcastInt-1)+"</td><td>"+ipToBinary(intToIp(brodcastInt-1))+"</td><tr>";
       output += "<tr><td>Brodcast:</td><td>"+intToIp(brodcastInt)+"</td><td>"+ipToBinary(intToIp(brodcastInt))+"</td><tr>";
       output += "<tr><td>---</td></tr>";
-      output += "<tr><td>Število gostiteljev:</td><td>"+(brodcastInt-omrezjeInt-1)+"</td><td>"+ipToBinary(intToIp(brodcastInt))+"</td><tr>";
+      output += "<tr><td>Število gostiteljev:</td><td>"+(brodcastInt-omrezjeInt-1)+"</td><tr>";
+      output += "<tr><td>Število podomrežij:</td><td>"+stOmrezij+"</td><tr>";
       output += "</table>";
 
       document.getElementById("out").innerHTML = output;
