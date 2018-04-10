@@ -29,8 +29,8 @@ function calc(ip, maska){
      {vrednost: "Zadnji gostitelj:", decimalna: intToIp(brodcastInt-1), binarna: ipToBinary(intToIp(brodcastInt-1))},
      {vrednost: "Brodcast:", decimalna: intToIp(brodcastInt), binarna: ipToBinary(intToIp(brodcastInt))},
      {vrednost: "---", decimalna: "---", binarna: "---"},
-     {vrednost: "Število gostiteljev:", decimalna: (brodcastInt-omrezjeInt-1)+""},
-     {vrednost: "Število podomrežij:", decimalna: stOmrezij+""}
+     {vrednost: "Število gostiteljev:", decimalna: (brodcastInt-omrezjeInt-1)+"", binarna: ""},
+     {vrednost: "Število podomrežij:", decimalna: stOmrezij+"", binarna: ""}
   ]
 
   var textOut = "";
